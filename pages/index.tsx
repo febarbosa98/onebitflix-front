@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Head from "next/head";
 import styles from "../styles/homeNoAuth.module.scss" 
 import HeaderNoAuth from "@/src/components/homeNoAuth/headerNoAuth";
+import PresentationSection from "@/src/components/homeNoAuth/presentationSection";
 
-const HomeNotAuth = function () {
+const HomeNoAuth = function () {
   return (
 		<>
 			<Head>
@@ -13,10 +13,13 @@ const HomeNotAuth = function () {
 				<meta name="description" content="tenha acesso aos melhores conteudos de programação simples e facil"/>
 			</Head>
 			<main>
+				<div className={styles.sectionBackground}>
 				<HeaderNoAuth/>
+				<PresentationSection/>
+				</div>
 			</main>
 		</>
   )
 };
 
-export default HomeNotAuth;
+export default HomeNoAuth;
