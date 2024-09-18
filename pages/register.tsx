@@ -5,8 +5,49 @@ import styles from "../styles/registerLogin.module.scss";
 import Head from "next/head";
 import { Form, FormGroup, Label, Container, Button, Input } from "reactstrap";
 import Footer from "@/src/components/common/footer";
+import { FormEvent, useState } from "react";
+import authService from "@/src/services/authService";
+import { useRouter } from "next/router";
+import ToastComponent from "@/src/components/common/toast";
 
 const Register = function () {
+  const router = useRouter()
+  const [toastIsOpen, setToastIsOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const handleRegister = async (event: FormEvent<HTMLFormElement>) =>{
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget)
+    const firstName = formData.get('firstName')!.toString()
+    const lastName = formData.get('lastName')!.toString()
+    const phone = formData.get('phone')!.toString()
+    const birth = formData.get('birth')!.toString()
+    const email = formData.get('email')!.toString()
+    const password = formData.get('password')!.toString()
+    const confirmPassword = formData.get('confirmPassword')!.toString()
+    const params = {firstName,lastName,phone,birth,email,password}
+
+    if(password != confirmPassword){
+      setToastIsOpen(true)
+      setTimeout(()=>{
+        setToastIsOpen(false)
+      }, 1000 * 3)
+      setToastMessage('Senha e confirmação diferentes')
+      return
+    }
+    const {data, status} = await authService.register(params)
+
+    if (status === 201) {
+      router.push("/login?registred=true")
+    } else {
+      setToastIsOpen(true)
+      setTimeout(()=>{
+        setToastIsOpen(false)
+      }, 1000 * 3)
+      setToastMessage(data.message)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -22,7 +63,7 @@ const Register = function () {
         />
         <Container className="py-5">
           <p className={styles.formTitle}>Bem-Vindo(a) ao OneBitFlix</p>
-          <Form className={styles.form}>
+          <Form className={styles.form} onSubmit={handleRegister}>
             <p className="text-center">
               <strong>Faça a sua conta</strong>
             </p>
@@ -64,15 +105,16 @@ const Register = function () {
             <Input id="password" name="password" type="password" placeholder="Digite a sua senha (min: 6 | max: 20)" required minLength={6} maxLength={20} className={styles.input}/>
           </FormGroup>
           <FormGroup>
-            <Label form="password" className={styles.Label}>
+            <Label form="confirmPassword" className={styles.Label}>
               CONFIRME SUA SENHA
             </Label>
-            <Input id="password" name="password" type="password" placeholder="Confirme a sua senha" required minLength={6} maxLength={20} className={styles.input}/>
+            <Input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirme a sua senha" required minLength={6} maxLength={20} className={styles.input}/>
           </FormGroup>
           <Button type="submit" outline className={styles.formBtn}>CADASTRAR</Button>
           </Form>
         </Container>
         <Footer/>
+        <ToastComponent color="bg-danger" isOpen={toastIsOpen} message={toastMessage}/>
       </main>
     </>
   );
