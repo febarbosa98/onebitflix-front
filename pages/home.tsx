@@ -1,5 +1,7 @@
 import FavoriteCategory from "@/src/components/homeAuth/favoriteCategory"
+import FeaturedCategory from "@/src/components/homeAuth/featuredCategory"
 import FeaturedSection from "@/src/components/homeAuth/featuresSection"
+import ListCategories from "@/src/components/homeAuth/listCategories"
 import NewestCategory from "@/src/components/homeAuth/newestCategory"
 import Head from "next/head"
 
@@ -14,6 +16,8 @@ const HomeAuth = function () {
                 <FeaturedSection/>
                 <NewestCategory/>
                 <FavoriteCategory/>
+                <FeaturedCategory />
+                <ListCategories/>
             </main>
         </>
     )
