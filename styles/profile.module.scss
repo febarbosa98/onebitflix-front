@@ -91,6 +91,8 @@
     text-align: center;
     color: white;
     font-weight: bold;
+    display: block;
+    margin: 10px auto;
     font-size: 15px;
     padding: 6px 20px;
     &:hover{
@@ -115,16 +117,27 @@
     padding: 14px 0px;
     &:hover{
         background-color: transparent;
-        border-color: $lightRed;
-        color: $lightGray;
+        border-color: $lightGray;
+        color: $lightRed;
     }
+    &:active{
+        background-color: transparent;
+        box-shadow: none;
+    }
+    &:focus{
+        box-shadow: none;
+        background-color: transparent;
+    }
+
+    
 }
 .header{
     background-color: black;
 }
 .footer{
     background-color: black;
-}
+    margin-top: 200px;
+   }
 
 @media (max-width: 991px) {
     .title{
