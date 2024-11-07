@@ -12,7 +12,7 @@ const PresentationSection = function () {
                     <p className={styles.subTitle}>ACESSO ILIMITADO</p>
                     <p className={styles.title}>Tenha acesso aos melores <br /> tutoriais de Programação.</p>
                     <p className={styles.description}>Estude de onde extiver, a qualquer momento, e continue<br />evoluindo como programador.</p>
-                    <Link href="/register">
+                    <Link href="/register" style={{ textDecoration: "none"}}>
                     <Button outline className={styles.btnCta}>
                         ACESSE AGORA
                         <img

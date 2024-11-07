@@ -1,0 +1,16 @@
+.noSearchResultText{
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.headFotBg{
+    background-color: black;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+}
+.searchResult{
+    flex: 1 0 auto
+}

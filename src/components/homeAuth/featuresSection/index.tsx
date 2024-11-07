@@ -5,34 +5,44 @@ import courseService, { CourseType } from "@/src/services/courseService"
 import HeaderAuth from "../../common/headerAuth";
 import { Button, Container } from "reactstrap";
 import Link from "next/link";
+import PageSpinner from "../../common/spinner";
 
 const FeaturedSection = function () {
     const { data, error } = useSWR("/featured", courseService.getFeaturedCourses);
 
     if (error) return error;
-    if(!data) return (<><p>Loading...</p></>);
+    if(!data) {
+        return <PageSpinner />
+    };
 
     return (
         <>
         {
-       data.data.map((course: CourseType)=>(
-         <div style={{backgroundImage: `linear-gradient(to bottom, #6666661a, #151515), url(
-         ${process.env.NEXT_PUBLIC_BASEURL}/${course.thumbnailUrl})`,
-         backgroundSize: "cover",
-         backgroundPosition: "center",
-         height: "480px",
-         
-         
-        }} 
-         key={course.id}>
-            <HeaderAuth/>
-            <Container className="pt-4">
+       data.data?.map((course: CourseType) => (
+        <div
+          style={{
+            backgroundImage: `linear-gradient(to bottom, #6666661a, #151515), url(${process.env.NEXT_PUBLIC_BASEURL}/${course.thumbnailUrl})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            height: "480px",
+          }}
+          key={course.id}
+        >
+          <HeaderAuth />
+          <Container className="pt-4">
             <p className={styles.title}>{course.name}</p>
             <p className={styles.description}>{course.synopsis}</p>
-            <Link href={`/courses/${course.id}`}>
-                <Button outline color='light' className={styles.button}>ACESSE AGORA! <img src="/buttonPlay.svg" alt="buttonimg" className={styles.buttonImg} /></Button>
+            <Link href={`/course/${course.id}`} style={{ textDecoration: "none" }}> 
+              <Button outline color="light" className={styles.button}>
+                ACESSE AGORA!
+                <img
+                  src="/buttonPlay.svg"
+                  alt="buttonImg"
+                  className={styles.buttonImg}
+                />
+              </Button>
             </Link>
-            </Container>
+          </Container>
          </div>
        ))[0]
         }

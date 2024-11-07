@@ -136,9 +136,15 @@
 }
 .footer{
     background-color: black;
-    margin-top: 200px;
-   }
-
+    }
+.main{
+    display: flex;
+    flex-direction: column;
+}
+.gridContainer {
+    flex: 1 0 auto;
+    padding: 80px 0;
+}
 @media (max-width: 991px) {
     .title{
         text-align: center;
