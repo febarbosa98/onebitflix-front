@@ -27,12 +27,12 @@ const HeaderAuth = function () {
     }
 
     useEffect(() => {
-        profileService.fetchCurrent().then((user)=>{
-            const firstNameInitial = user.firstName.slice(0,1)
-            const lastNameInitial = user.lastName.slice(0,1)
-            setInitials(firstNameInitial + lastNameInitial)
-        })
-    })
+        profileService.fetchCurrent().then((user) => {
+          const firstNameInitial = user.firstName.slice(0, 1);
+          const lastNameInitial = user.lastName.slice(0, 1);
+          setInitials(firstNameInitial + lastNameInitial);
+        });
+      }, []);
 
     const handleOpenModal = () => {
         setModalOpen(true)
