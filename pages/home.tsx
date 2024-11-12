@@ -19,7 +19,7 @@ const HomeAuth = function () {
         } else{
             setLoading(false)
         }
-    },[])
+    },[router])
     if(loading){
         return <PageSpinner/>
     }
